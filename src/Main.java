@@ -3,9 +3,15 @@ import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
+    public static char maiuscula(char opcao){
+        if(opcao >= 'a' && opcao <= 'z'){
+            opcao = (char) (opcao -32);
+        }
+        return opcao;
+    }
+
     public static void menu(){
-
-
         Scanner menu = new Scanner (System.in);
 
         char opcao = ' ';
@@ -19,33 +25,13 @@ public class Main {
 
             opcao = menu.nextLine().charAt(0);
 
-            if(opcao == 'v') opcao = 'V';
-            else if(opcao == 'm') opcao = 'M';
-            else if(opcao == 'e') opcao = 'E';
-            else if(opcao == 's') opcao = 'S';
-
-
+            opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'V':
-                    menuVisualizar();
-                    break;
-
-                case 'M':
-                    System.out.println("\n(M)arcar)\n");
-                    break;
-
-                case 'E':
-                    menuEditar();
-                    break;
-
-                case 'S':
-                    System.out.println("\nAté logo!");
-                    menu.close();
-                    break;
-
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'V': menuVisualizar(); break;
+                case 'M': menuMarcar();; break;
+                case 'E': menuEditar(); break;
+                case 'S': System.out.println("\nAté logo!"); break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         }while(opcao != 'S');
     }
@@ -67,46 +53,45 @@ public class Main {
 
             opcao = menuVisualizar.nextLine().charAt(0);
 
-            if(opcao == 't') opcao = 'T';
-            else if(opcao == 'd') opcao = 'D';
-            else if(opcao == 'a') opcao = 'A';
-            else if(opcao == 'p') opcao = 'P';
-            else if(opcao == 'f') opcao = 'F';
-            else if(opcao == 'l') opcao = 'L';
-            else if(opcao == 'v') opcao = 'V';
-
-
+            opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'T':
-                    System.out.println("\n(V)isualizar todas");
-                    break;
+                case 'T': System.out.println("\n(V)isualizar todas"); break;
+                case 'D': System.out.println("\n(M)arcar)\n"); break;
+                case 'A': System.out.println("\n(E)ditar\n"); break;
+                case 'P': System.out.println("\n(E)ditar\n"); break;
+                case 'F': System.out.println("\n(E)ditar\n"); break;
+                case 'L': System.out.println("\n(E)ditar\n"); break;
+                case 'V': break;
+                default: System.out.println("Opção Inválida!"); break;
+            }
+        }while (opcao != 'V');
+    }
 
-                case 'D':
-                    System.out.println("\n(M)arcar)\n");
-                    break;
+    public static void menuMarcar(){
+        Scanner menuMarcar = new Scanner (System.in);
 
-                case 'A':
-                    System.out.println("\n(E)ditar\n");
-                    break;
+        char opcao = ' ';
+        do{
+            System.out.println("\n|MARCAR|");
+            System.out.println("|Marcar como (f)eita por número |");
+            System.out.println("|Marcar como feita por (t)exto |");
+            System.out.println("|(D)esmarcar última feita |");
+            System.out.println("|Marcar todas (n)o dia d|");
+            System.out.println("|(V)oltar|");
+            System.out.println("Digite uma opção: ");
 
-                case 'P':
-                    System.out.println("\n(E)ditar\n");
-                    break;
+            opcao = menuMarcar.nextLine().charAt(0);
 
-                case 'F':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-
-                case 'L':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-
-                case 'V':
-                    break;
-
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+            opcao = maiuscula(opcao);
+            switch (opcao) {
+                case 'T': System.out.println("\n(V)isualizar todas"); break;
+                case 'D': System.out.println("\n(M)arcar)\n"); break;
+                case 'A': System.out.println("\n(E)ditar\n"); break;
+                case 'P': System.out.println("\n(E)ditar\n"); break;
+                case 'F': System.out.println("\n(E)ditar\n"); break;
+                case 'L': System.out.println("\n(E)ditar\n"); break;
+                case 'V': break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         }while (opcao != 'V');
     }
@@ -128,55 +113,50 @@ public class Main {
 
             opcao = menuEditar.nextLine().charAt(0);
 
-            if(opcao == 'a') opcao = 'A';
-            else if(opcao == 't') opcao = 'T';
-            else if(opcao == 'p') opcao = 'P';
-            else if(opcao == 'f') opcao = 'F';
-            else if(opcao == 'j') opcao = 'J';
-            else if(opcao == 'e') opcao = 'E';
-            else if(opcao == 'v') opcao = 'V';
-
-
+            opcao = maiuscula(opcao);
             switch (opcao) {
                 case 'A':
                     System.out.println("\n(V)isualizar");
                     break;
-
-                case 'T':
-                    System.out.println("\n(M)arcar)\n");
-                    break;
-
-                case 'P':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-
-                case 'F':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-
-                case 'J':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-
-                case 'E':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-
-                case 'V':
-                    break;
-
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'T': System.out.println("\n(M)arcar)\n"); break;
+                case 'P': System.out.println("\n(E)ditar\n"); break;
+                case 'F': System.out.println("\n(E)ditar\n"); break;
+                case 'J': System.out.println("\n(E)ditar\n"); break;
+                case 'E': System.out.println("\n(E)ditar\n"); break;
+                case 'V': break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         }while (opcao != 'V');
     }
 
+    public static void adicionarTarefa(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[]){
+
+
+    }
 
 
     public static void main(String[] args) {
 
+        int tamMax=100;
+        String [] tarefa = new String[tamMax];
+        boolean [] temPrazo = new boolean[tamMax];
+        boolean [] foiFeita = new boolean[tamMax];
+        int [][] data = new int[tamMax][3];
+        int nTarefas = 0;
+
+        tarefa[0]="Ir ao dentista"; temPrazo[0]=true; foiFeita[0]=false; data[0][0]=17; data[0][1]=12;
+        data[0][2]=2024;
+        tarefa[1]="Teste de Programação"; temPrazo[1]=true; foiFeita[1]=true; data[1][0]=14; data[1][1]=12;
+        data[1][2]=2024;
+        tarefa[2]="Corrigir testes"; temPrazo[2]=false; foiFeita[2]=false;
+        tarefa[3]="Frequência de Programação"; temPrazo[3]=true; foiFeita[3]=false; data[3][0]=13;
+        data[3][1]=1; data[3][2]=2024;
+        tarefa[4]="Presentes!!!"; temPrazo[4]=true; foiFeita[4]=false; data[4][0]=25; data[4][1]=12;
+        data[4][2]=2024;
+        nTarefas=5;
+
         menu();
+        
     }
 
 }
