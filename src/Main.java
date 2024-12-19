@@ -130,16 +130,25 @@ public class Main {
     public static void adicionarTarefa(String tarefa[], boolean temPrazo[], int data[][]){
 
         Scanner adicionarTarefa = new Scanner(System.in);
-        System.out.print("Qual o nome da tarefa?");
+        System.out.print("Qual o nome da tarefa? ");
         String nomeTarefa = adicionarTarefa.nextLine();
-        System.out.print("Tem Prazo? (true ou false)");
+        System.out.print("Tem Prazo? (dd/mm/aaaa): ");
         String prazo = adicionarTarefa.nextLine();
         
-        //for(int i = 0; )
     
         for(int i = 0; i < tarefa.length; i++){
             if(tarefa[i] == null){
                 tarefa[i] = nomeTarefa;
+
+                if (prazo != "") {
+                    temPrazo[i] = true;
+                    String partesData[] = prazo.split("/");
+                    data[i][0] = Integer.parseInt(partesData[0]);
+                    data[i][1] = Integer.parseInt(partesData[1]);
+                    data[i][2] = Integer.parseInt(partesData[2]);
+                }
+                else
+                    temPrazo[i] = false;
                 break;
             }
         }
@@ -147,8 +156,7 @@ public class Main {
         // Mostrar as tarefas para verificar
         for (int i = 0; i < tarefa.length; i++) {
             if (tarefa[i] != null) {
-                System.out.println("Tarefa " + i + ": " + tarefa[i] + " | Prazo: " + temPrazo[i] + 
-                    " | Data: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
+                System.out.println("Tarefa " + i + ": " + tarefa[i] + " | Data: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
             }
         }
     }
