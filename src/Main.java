@@ -240,10 +240,10 @@ public class Main {
                     nTarefas = apagarTarefaPosicaoN(tarefa, temPrazo, foiFeita, data, nTarefas);
                     break;
                 case 'F':
-                    System.out.println("\n(E)ditar\n");
+                    nTarefas = apagarFeitas(tarefa, temPrazo, foiFeita, data, nTarefas);
                     break;
                 case 'J':
-                    System.out.println("\n(E)ditar\n");
+                    nTarefas = juntarTarefas(tarefa, temPrazo, foiFeita, data, nTarefas);
                     break;
                 case 'E':
                     System.out.println("\n(E)ditar\n");
@@ -297,38 +297,12 @@ public class Main {
         }
 
         nTarefas++; // Incrementa o número de tarefas
-
-        // Exibe as tarefas após a alteração
-        System.out.println("\nLista atualizada de tarefas:");
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
-                }
-            }
-        }
         return nTarefas; // Retorna o número atualizado de tarefas
     }
 
     public static int adicionarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
             int nTarefas) {
         Scanner adicionarTarefaPosicaoN = new Scanner(System.in);
-
-        // Exibir as tarefas antes da alteração
-        System.out.println("\nLista de tarefas:");
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
-                }
-            }
-        }
 
         System.out.print("\nEm qual posição deseja adicionar/modificar a tarefa? ");
         int n = adicionarTarefaPosicaoN.nextInt();
@@ -384,8 +358,76 @@ public class Main {
         }
 
         nTarefas++;
+        return nTarefas;
+    }
 
-        // Exibir as tarefas após a alteração
+    public static int apagarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
+            int nTarefas) {
+        Scanner ApagarTarefaPosicaoN = new Scanner(System.in);
+        System.out.print("Qual a posição da tarefa que deseja apagar? ");
+        int n = ApagarTarefaPosicaoN.nextInt();
+
+        if (n >= 0 && n <= nTarefas) {
+            for (int i = n - 1; i < nTarefas - 1; i++) {
+                tarefa[i] = tarefa[i + 1];
+                temPrazo[i] = temPrazo[i + 1];
+                foiFeita[i] = foiFeita[i + 1];
+                data[i][0] = data[i + 1][0];
+                data[i][1] = data[i + 1][1];
+                data[i][2] = data[i + 1][2];
+            }
+            // Limpar a última posição, que agora está vazia
+            tarefa[nTarefas - 1] = null;
+            temPrazo[nTarefas - 1] = false;
+            foiFeita[nTarefas - 1] = false;
+            data[nTarefas - 1][0] = 0;
+            data[nTarefas - 1][1] = 0;
+            data[nTarefas - 1][2] = 0;
+
+            // Atualizar o número total de tarefas
+            nTarefas--;
+            System.out.println("Tarefa removida com sucesso.");
+        } else {
+            System.out.println("Essa tarefa não existe");
+        }
+        return nTarefas;
+    }
+
+    public static int apagarFeitas(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
+            int nTarefas) {
+
+        int tarefasApagadas = 0;
+
+        for (int i = 0; i < nTarefas; i++) {
+            if (foiFeita[i]) {
+                for (int j = i; j < nTarefas - 1; j++) {
+                    tarefa[j] = tarefa[j + 1];
+                    temPrazo[j] = temPrazo[j + 1];
+                    foiFeita[j] = foiFeita[j + 1];
+                    data[j][0] = data[j + 1][0];
+                    data[j][1] = data[j + 1][1];
+                    data[j][2] = data[j + 1][2];
+                }
+
+                tarefa[nTarefas - 1] = null;
+                temPrazo[nTarefas - 1] = false;
+                foiFeita[nTarefas - 1] = false;
+                data[nTarefas - 1][0] = 0;
+                data[nTarefas - 1][1] = 0;
+                data[nTarefas - 1][2] = 0;
+
+                nTarefas--;
+                i--;
+                tarefasApagadas++;
+            }
+        }
+
+        if (tarefasApagadas == 0) {
+            System.out.println("Não existem tarefas feitas.");
+        } else {
+            System.out.println("Tarefas feitas apagadas com sucesso.");
+        }
+
         System.out.println("\nLista atualizada de tarefas:");
         for (int i = 0; i < nTarefas; i++) {
             if (tarefa[i] != null) {
@@ -401,11 +443,16 @@ public class Main {
         return nTarefas;
     }
 
-    public static int apagarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
+    public static int juntarTarefas(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
             int nTarefas) {
-        Scanner ApagarTarefaPosicaoN = new Scanner(System.in);
+        Scanner juntarTarefas = new Scanner(System.in);
+        System.out.print("Introduz a primeira tarefa: ");
+        int tarefa1 = juntarTarefas.nextInt();
+        tarefa1 -= 1;
+        System.out.print("Introduz a segunda tarefa tarefa: ");
+        int tarefa2 = juntarTarefas.nextInt();
+        tarefa2 -= 1;
 
-        // Exibe as tarefas após a alteração
         System.out.println("\nLista atualizada de tarefas:");
         for (int i = 0; i < nTarefas; i++) {
             if (tarefa[i] != null) {
@@ -418,35 +465,27 @@ public class Main {
             }
         }
 
-        System.out.print("Qual a posição da tarefa que deseja apagar? ");
-        int n = ApagarTarefaPosicaoN.nextInt();
+        if (tarefa1 >= 0 && tarefa1 <= nTarefas && tarefa2 >= 0 && tarefa2 <= nTarefas) {
+            tarefa[tarefa1] = tarefa[tarefa1] + ", " + tarefa[tarefa2];
 
-        if (n >= 0 && n <= nTarefas) {
-            for (int i = n - 1; i < nTarefas - 1; i++) {
-                tarefa[i] = tarefa[i + 1];
-                temPrazo[i] = temPrazo[i + 1];
-                foiFeita[i] = foiFeita[i + 1];
-                data[i][0] = data[i + 1][0];
-                data[i][1] = data[i + 1][1];
-                data[i][2] = data[i + 1][2];
-            }
+            if (data[tarefa1][0] > 0 && data[tarefa2][0] > 0)
+                data[tarefa1][0] = (data[tarefa1][0] + data[tarefa2][0]) / 2;
+            else if (data[tarefa1][0] == 0 && data[tarefa2][0] > 0)
+                data[tarefa1][0] = (data[tarefa2][0]);
 
-            // Limpar a última posição, que agora está vazia
-            tarefa[nTarefas - 1] = null;
-            temPrazo[nTarefas - 1] = false;
-            foiFeita[nTarefas - 1] = false;
-            data[nTarefas - 1][0] = 0;
-            data[nTarefas - 1][1] = 0;
-            data[nTarefas - 1][2] = 0;
+            if (data[tarefa1][1] > 0 && data[tarefa2][1] > 0)
+                data[tarefa1][1] = (data[tarefa1][1] + data[tarefa2][1]) / 2;
+            else if (data[tarefa1][1] == 0 && data[tarefa2][1] > 0)
+                data[tarefa1][1] = (data[tarefa2][1]);
 
-            // Atualizar o número total de tarefas
-            nTarefas--;
-            System.out.println("Tarefa removida com sucesso.");
-        } else {
-            System.out.println("Essa tarefa não existe");
-        }
+            if (data[tarefa1][2] > 0 && data[tarefa2][2] > 0)
+                data[tarefa1][2] = (data[tarefa1][2] + data[tarefa2][2]) / 2;
+            else if (data[tarefa1][2] == 0 && data[tarefa2][2] > 0)
+                data[tarefa1][2] = (data[tarefa2][2]);
 
-        // Exibe as tarefas após a alteração
+        } else
+            System.out.println("Essas tarefas não existem");
+
         System.out.println("\nLista atualizada de tarefas:");
         for (int i = 0; i < nTarefas; i++) {
             if (tarefa[i] != null) {
@@ -459,6 +498,7 @@ public class Main {
             }
         }
         return nTarefas;
+
     }
 
     public static void main(String[] args) {
