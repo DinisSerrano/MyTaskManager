@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
     public static char maiuscula(char opcao) {
@@ -27,98 +25,14 @@ public class Main {
 
             opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'V':
-                    menuVisualizar();
-                    break;
-                case 'M':
-                    menuMarcar(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    ;
-                    break;
-                case 'E':
-                    menuEditar(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'S':
-                    System.out.println("\nAté logo!");
-                    break;
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'V': menuVisualizar(); break;
+                case 'M': menuMarcar(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'E': menuEditar(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'S': System.out.println("\nAté logo!"); break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         } while (opcao != 'S');
     }
-
-    // METODO PARA VISUALIZAR AS TAREFAS TODAS
-    /*
-     * public static void visualizarTarefas(String [] tarefa, boolean [] temPrazo,
-     * boolean [] foiFeita, boolean [], int [][] data) {
-     * System.out.printf("%-6s %-40s %-15s %-10s\n", "", "Tarefa", "Data", "Feita");
-     * for (int i = 0; i < nTarefas; i++) {
-     * // Imprime o número e o nome da tarefa com os dois pontos
-     * System.out.printf("%-5d: %-40s ", (i + 1), tarefa[i]);
-     * 
-     * // Imprime a data ou "Sem prazo" se não tiver data
-     * if (temPrazo[i]) {
-     * System.out.printf("%-15s", data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-     * } else {
-     * System.out.printf("%-15s", "--/--/----");
-     * }
-     * 
-     * // Indica se a tarefa foi feita ou não
-     * if (foiFeita[i]) {
-     * System.out.printf(" ✔\n");
-     * } else {
-     * System.out.printf(" X\n");
-     * }
-     * }
-     * }
-     * //METODO PARA VISUALIZAR NO DIA (D)
-     * public static void visualizarTarefasPorData(int dia, int mes, int ano) {
-     * boolean encontrouTarefa = false;
-     * 
-     * 
-     * Scanner scanner = new Scanner(System.in);
-     * 
-     * System.out.
-     * println("Digite a data para visualizar as tarefas (dia, mês, ano):");
-     * System.out.print("Dia: ");
-     * dia = scanner.nextInt();
-     * 
-     * System.out.print("Mês: ");
-     * mes = scanner.nextInt();
-     * 
-     * System.out.print("Ano: ");
-     * ano = scanner.nextInt();
-     * 
-     * System.out.printf("%-6s %-40s %-15s %-10s\n", "", "Tarefa", "Data", "Feita");
-     * 
-     * for(int i = 0; i < nTarefas; i++){
-     * // Verifica se a tarefa tem prazo e se o prazo corresponde à data fornecida
-     * if (temPrazo[i] && data[i][0] == dia && data[i][1] == mes && data[i][2] ==
-     * ano) {
-     * // Imprime o número e nome da tarefa
-     * System.out.printf("%-5d: %-40s ", (i + 1), tarefa[i]);
-     * 
-     * // Imprime a data
-     * System.out.printf("%-15s", data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-     * 
-     * // Indica se a tarefa foi feita ou não
-     * if (foiFeita[i]) {
-     * System.out.printf("✔\n");
-     * } else {
-     * System.out.printf("X\n");
-     * }
-     * 
-     * // Marca que encontrou uma tarefa com a data fornecida
-     * encontrouTarefa = true;
-     * }
-     * }
-     * 
-     * // Se não encontrar tarefas para a data informada, exibe uma mensagem
-     * if (!encontrouTarefa) {
-     * System.out.println("Nenhuma tarefa encontrada para esta data.");
-     * }
-     * }
-     */
 
     public static void menuVisualizar() {
         Scanner menuVisualizar = new Scanner(System.in);
@@ -139,36 +53,20 @@ public class Main {
 
             opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'T':
-                    System.out.println("\n(V)isualizar todas");
-                    break;
-                case 'D':
-                    System.out.println("\n(M)arcar)\n");
-                    break;
-                case 'A':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-                case 'P':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-                case 'F':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-                case 'L':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-                case 'V':
-                    break;
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'T': System.out.println("\n(V)isualizar todas"); break;
+                case 'D': System.out.println("\n(M)arcar)\n"); break;
+                case 'A': System.out.println("\n(E)ditar\n"); break;
+                case 'P': System.out.println("\n(E)ditar\n"); break;
+                case 'F': System.out.println("\n(E)ditar\n"); break;
+                case 'L': System.out.println("\n(E)ditar\n"); break;
+                case 'V': break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         } while (opcao != 'V');
     }
 
     public static void menuMarcar(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner menuMarcar = new Scanner(System.in);
-
         char opcao = ' ';
         do {
             System.out.println("\n|MARCAR|");
@@ -183,23 +81,12 @@ public class Main {
 
             opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'F':
-                    System.out.println("\n(V)isualizar todas");
-                    break;
-                case 'T':
-                    System.out.println("\n(M)arcar)\n");
-                    break;
-                case 'D':
-                    desmarcarUltimaFeita(foiFeita, opcao);
-                    break;
-                case 'N':
-                    marcarTodasDiaD(foiFeita, nTarefas, data, tarefa);
-                    break;
-                case 'V':
-                    break;
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'F': System.out.println("\n(V)isualizar todas"); break;
+                case 'T': System.out.println("\n(M)arcar)\n"); break;
+                case 'D': desmarcarUltimaFeita(foiFeita, opcao); break;
+                case 'N': marcarTodasDiaD(foiFeita, nTarefas, data, tarefa); break;
+                case 'V': break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         } while (opcao != 'V');
     }
@@ -256,30 +143,14 @@ public class Main {
 
             opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'A':
-                    nTarefas = adicionarTarefa(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'T':
-                    nTarefas = adicionarTarefaPosicaoN(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    ;
-                    break;
-                case 'P':
-                    nTarefas = apagarTarefaPosicaoN(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'F':
-                    nTarefas = apagarFeitas(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'J':
-                    nTarefas = juntarTarefas(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'E':
-                    menuEditarTarefa(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'V':
-                    break;
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'A': nTarefas = adicionarTarefa(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'T': nTarefas = adicionarTarefaPosicaoN(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'P': nTarefas = apagarTarefaPosicaoN(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'F': nTarefas = apagarFeitas(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'J': nTarefas = juntarTarefas(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'E': menuEditarTarefa(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'V': break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         } while (opcao != 'V');
     }
@@ -327,11 +198,15 @@ public class Main {
         return nTarefas;
     }
 
-    public static int adicionarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
-            int nTarefas) {
+    public static int adicionarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner adicionarTarefaPosicaoN = new Scanner(System.in);
 
         System.out.print("\nEm qual posição deseja adicionar/modificar a tarefa? ");
+        while (!adicionarTarefaPosicaoN.hasNextInt()) {
+            System.out.println("Entrada inválida! Insira apenas números.");
+            System.out.print("\nEm qual posição deseja adicionar/modificar a tarefa? ");
+            adicionarTarefaPosicaoN.next(); // Consome a entrada inválida
+        }
         int n = adicionarTarefaPosicaoN.nextInt();
         adicionarTarefaPosicaoN.nextLine(); // Limpar o buffer após nextInt()
 
@@ -371,6 +246,7 @@ public class Main {
                     data[n - 1][0] = dia;
                     data[n - 1][1] = mes;
                     data[n - 1][2] = ano;
+                    System.out.println("Tarefa inserida com sucesso");
                 } else {
                     System.out.println("Data inválida! A tarefa será cadastrada sem prazo.");
                     temPrazo[n - 1] = false;
@@ -382,15 +258,19 @@ public class Main {
         } else {
             temPrazo[n - 1] = false;
         }
-
         nTarefas++;
         return nTarefas;
     }
 
-    public static int apagarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
-            int nTarefas) {
+    public static int apagarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner ApagarTarefaPosicaoN = new Scanner(System.in);
+
         System.out.print("Qual a posição da tarefa que deseja apagar? ");
+        while (!ApagarTarefaPosicaoN.hasNextInt()) {
+            System.out.println("Entrada inválida! Insira apenas números.");
+            System.out.print("Qual a posição da tarefa que deseja apagar? ");
+            ApagarTarefaPosicaoN.next(); // Consome a entrada inválida
+        }
         int n = ApagarTarefaPosicaoN.nextInt();
 
         if (n >= 0 && n <= nTarefas) {
@@ -402,14 +282,7 @@ public class Main {
                 data[i][1] = data[i + 1][1];
                 data[i][2] = data[i + 1][2];
             }
-            // Limpar a última posição, que agora está vazia
-            tarefa[nTarefas - 1] = null;
-            temPrazo[nTarefas - 1] = false;
-            foiFeita[nTarefas - 1] = false;
-            data[nTarefas - 1][0] = 0;
-            data[nTarefas - 1][1] = 0;
-            data[nTarefas - 1][2] = 0;
-
+            apagarUltimaTarefa(tarefa, temPrazo, foiFeita, data, nTarefas);
             // Atualizar o número total de tarefas
             nTarefas--;
             System.out.println("Tarefa removida com sucesso.");
@@ -419,9 +292,7 @@ public class Main {
         return nTarefas;
     }
 
-    public static int apagarFeitas(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
-            int nTarefas) {
-
+    public static int apagarFeitas(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         int tarefasApagadas = 0;
 
         for (int i = 0; i < nTarefas; i++) {
@@ -434,118 +305,80 @@ public class Main {
                     data[j][1] = data[j + 1][1];
                     data[j][2] = data[j + 1][2];
                 }
-
-                tarefa[nTarefas - 1] = null;
-                temPrazo[nTarefas - 1] = false;
-                foiFeita[nTarefas - 1] = false;
-                data[nTarefas - 1][0] = 0;
-                data[nTarefas - 1][1] = 0;
-                data[nTarefas - 1][2] = 0;
-
+                apagarUltimaTarefa(tarefa, temPrazo, foiFeita, data, nTarefas);
                 nTarefas--;
                 i--;
                 tarefasApagadas++;
             }
         }
-
         if (tarefasApagadas == 0) {
             System.out.println("Não existem tarefas feitas.");
         } else {
             System.out.println("Tarefas feitas apagadas com sucesso.");
         }
-
-        System.out.println("\nLista atualizada de tarefas:");
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
-                }
-            }
-        }
-
         return nTarefas;
     }
 
-    public static int juntarTarefas(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
-            int nTarefas) {
+    public static int juntarTarefas(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner juntarTarefas = new Scanner(System.in);
+        int tarefa1 = -1;
+        int tarefa2 = -1;
+        
         System.out.print("Introduz a primeira tarefa: ");
-        int tarefa1 = juntarTarefas.nextInt();
-        tarefa1 -= 1;
-        System.out.print("Introduz a segunda tarefa tarefa: ");
-        int tarefa2 = juntarTarefas.nextInt();
-        tarefa2 -= 1;
+        while (!juntarTarefas.hasNextInt()) {
+            System.out.println("Entrada inválida! Insira apenas números.");
+            System.out.print("Introduz a primeira tarefa: ");
+            juntarTarefas.next(); // Consome a entrada inválida
+        }
+        tarefa1 = juntarTarefas.nextInt() - 1; // Ajusta o índice para começar de 0
+        
+        System.out.print("Introduz a segunda tarefa: ");
+        while (!juntarTarefas.hasNextInt()) {
+            System.out.println("Entrada inválida! Insira apenas números.");
+            System.out.print("Introduz a segunda tarefa: ");
+            juntarTarefas.next(); // Consome a entrada inválida
+        }
+        tarefa2 = juntarTarefas.nextInt() - 1; // Ajusta o índice para começar de 0
+        
+        if(tarefa1 != tarefa2){
+            if (tarefa1 > 0 && tarefa1 <= nTarefas && tarefa2 > 0 && tarefa2 <= nTarefas) {
+                tarefa[tarefa1] = tarefa[tarefa1] + ", " + tarefa[tarefa2];
 
-        System.out.println("\nLista atualizada de tarefas:");
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
+                if (data[tarefa1][0] > 0 && data[tarefa2][0] > 0)
+                    data[tarefa1][0] = (data[tarefa1][0] + data[tarefa2][0]) / 2;
+                else if (data[tarefa1][0] == 0 && data[tarefa2][0] > 0)
+                    data[tarefa1][0] = (data[tarefa2][0]);
+
+                if (data[tarefa1][1] > 0 && data[tarefa2][1] > 0)
+                    data[tarefa1][1] = (data[tarefa1][1] + data[tarefa2][1]) / 2;
+                else if (data[tarefa1][1] == 0 && data[tarefa2][1] > 0)
+                    data[tarefa1][1] = (data[tarefa2][1]);
+
+                if (data[tarefa1][2] > 0 && data[tarefa2][2] > 0)
+                    data[tarefa1][2] = (data[tarefa1][2] + data[tarefa2][2]) / 2;
+                else if (data[tarefa1][2] == 0 && data[tarefa2][2] > 0)
+                    data[tarefa1][2] = (data[tarefa2][2]);
+
+                for (int i = tarefa2; i <= nTarefas - 1; i++) {
+                    tarefa[i] = tarefa[i + 1];
+                    temPrazo[i] = temPrazo[i + 1];
+                    foiFeita[i] = foiFeita[i + 1];
+                    data[i][0] = data[i + 1][0];
+                    data[i][1] = data[i + 1][1];
+                    data[i][2] = data[i + 1][2];
                 }
+                apagarUltimaTarefa(tarefa, temPrazo, foiFeita, data, nTarefas);
+                nTarefas--;
+                System.out.println("Tarefas juntadas com sucesso");
+                return nTarefas;
+            }
+            else {
+                System.out.println("Essas tarefas não existem");
             }
         }
-
-        if (tarefa1 >= 0 && tarefa1 <= nTarefas && tarefa2 >= 0 && tarefa2 <= nTarefas) {
-            tarefa[tarefa1] = tarefa[tarefa1] + ", " + tarefa[tarefa2];
-
-            if (data[tarefa1][0] > 0 && data[tarefa2][0] > 0)
-                data[tarefa1][0] = (data[tarefa1][0] + data[tarefa2][0]) / 2;
-            else if (data[tarefa1][0] == 0 && data[tarefa2][0] > 0)
-                data[tarefa1][0] = (data[tarefa2][0]);
-
-            if (data[tarefa1][1] > 0 && data[tarefa2][1] > 0)
-                data[tarefa1][1] = (data[tarefa1][1] + data[tarefa2][1]) / 2;
-            else if (data[tarefa1][1] == 0 && data[tarefa2][1] > 0)
-                data[tarefa1][1] = (data[tarefa2][1]);
-
-            if (data[tarefa1][2] > 0 && data[tarefa2][2] > 0)
-                data[tarefa1][2] = (data[tarefa1][2] + data[tarefa2][2]) / 2;
-            else if (data[tarefa1][2] == 0 && data[tarefa2][2] > 0)
-                data[tarefa1][2] = (data[tarefa2][2]);
-
-            for (int i = tarefa2; i <= nTarefas - 1; i++) {
-                tarefa[i] = tarefa[i + 1];
-                temPrazo[i] = temPrazo[i + 1];
-                foiFeita[i] = foiFeita[i + 1];
-                data[i][0] = data[i + 1][0];
-                data[i][1] = data[i + 1][1];
-                data[i][2] = data[i + 1][2];
-            }
-            // Limpar a última posição, que agora está vazia
-            tarefa[nTarefas - 1] = null;
-            temPrazo[nTarefas - 1] = false;
-            foiFeita[nTarefas - 1] = false;
-            data[nTarefas - 1][0] = 0;
-            data[nTarefas - 1][1] = 0;
-            data[nTarefas - 1][2] = 0;
-
-            // Atualizar o número total de tarefas
-            nTarefas--;
-            System.out.println("Tarefa removida com sucesso.");
-            System.out.println("\nLista atualizada de tarefas:");
-            for (int i = 0; i < nTarefas; i++) {
-                if (tarefa[i] != null) {
-                    System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                    if (temPrazo[i]) {
-                        System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                    } else {
-                        System.out.println(" | Sem prazo");
-                    }
-                }
-            }
-
-            return nTarefas;
-
-        } else {
-            System.out.println("Essas tarefas não existem");
+        else {
+            System.out.println("Não se pode juntar a mesma tarefa");
         }
-
         return nTarefas;
     }
 
@@ -564,50 +397,43 @@ public class Main {
 
             opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'E':
-                    editarTexto(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    break;
-                case 'R':
-                    adicionarRemoverData(tarefa, temPrazo, foiFeita, data, nTarefas);
-                    ;
-                    break;
-                default:
-                    System.out.println("Opção Inválida!");
-                    break;
+                case 'E': editarTexto(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                case 'R': adicionarRemoverData(tarefa, temPrazo, foiFeita, data, nTarefas); break;
+                default: System.out.println("Opção Inválida!"); break;
             }
         } while (opcao != 'V');
     }
 
-    public static void editarTexto(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
-            int nTarefas) {
+    public static void editarTexto(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner editarTexto = new Scanner(System.in);
         int posicao = 0;
+
         System.out.print("Introduza a posição da tarefa: ");
+        while (!editarTexto.hasNextInt()) {
+            System.out.println("Entrada inválida! Insira apenas números.");
+            System.out.print("Introduza a posição da tarefa: ");
+            editarTexto.next(); // Consome a entrada inválida
+        }
         posicao = editarTexto.nextInt();
         editarTexto.nextLine(); // Limpar o buffer após nextInt()
+
 
         System.out.print("introduza o novo texto: ");
         String texto = editarTexto.nextLine();
 
         tarefa[posicao - 1] = texto;
         System.out.print("Texto alterado com sucesso!");
-
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
-                }
-            }
-        }
     }
 
-    public static void adicionarRemoverData(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
-            int nTarefas) {
+    public static void adicionarRemoverData(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner AdicionarRemoverrData = new Scanner(System.in);
+
         System.out.print("Introduza a posição da tarefa: ");
+        while (!AdicionarRemoverrData.hasNextInt()) {
+            System.out.println("Entrada inválida! Insira apenas números.");
+            System.out.print("Introduza a posição da tarefa: ");
+            AdicionarRemoverrData.next(); // Consome a entrada inválida
+        }
         int posicao = AdicionarRemoverrData.nextInt();
         AdicionarRemoverrData.nextLine(); // Limpar o buffer após nextInt()
 
@@ -631,6 +457,7 @@ public class Main {
                     data[posicao - 1][0] = dia;
                     data[posicao - 1][1] = mes;
                     data[posicao - 1][2] = ano;
+                    System.out.println("Data introduzida com sucesso");
                 } else {
                     System.out.println("Data inválida! A tarefa será introduzida sem prazo.");
                     temPrazo[posicao - 1] = false;
@@ -639,19 +466,17 @@ public class Main {
                 System.out.println("Formato de data inválido! A tarefa será introduzida sem prazo.");
                 temPrazo[posicao - 1] = false;
             }
-
         }
+    }
 
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
-                }
-            }
-        }
+    public static void apagarUltimaTarefa(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas){
+
+        tarefa[nTarefas - 1] = null;
+        temPrazo[nTarefas - 1] = false;
+        foiFeita[nTarefas - 1] = false;
+        data[nTarefas - 1][0] = 0;
+        data[nTarefas - 1][1] = 0;
+        data[nTarefas - 1][2] = 0;
     }
 
     public static void main(String[] args) {
@@ -663,37 +488,13 @@ public class Main {
         int[][] data = new int[tamMax][3];
         int nTarefas = 0;
 
-        tarefa[0] = "Ir ao dentista";
-        temPrazo[0] = true;
-        foiFeita[0] = false;
-        data[0][0] = 17;
-        data[0][1] = 12;
-        data[0][2] = 2024;
-        tarefa[1] = "Teste de Programação";
-        temPrazo[1] = true;
-        foiFeita[1] = true;
-        data[1][0] = 14;
-        data[1][1] = 12;
-        data[1][2] = 2024;
-        tarefa[2] = "Corrigir testes";
-        temPrazo[2] = false;
-        foiFeita[2] = false;
-        tarefa[3] = "Frequência de Programação";
-        temPrazo[3] = true;
-        foiFeita[3] = false;
-        data[3][0] = 13;
-        data[3][1] = 1;
-        data[3][2] = 2024;
-        tarefa[4] = "Presentes!!!";
-        temPrazo[4] = true;
-        foiFeita[4] = false;
-        data[4][0] = 25;
-        data[4][1] = 12;
-        data[4][2] = 2024;
+        tarefa[0] = "Ir ao dentista"; temPrazo[0] = true; foiFeita[0] = false; data[0][0] = 17; data[0][1] = 12; data[0][2] = 2024;
+        tarefa[1] = "Teste de Programação"; temPrazo[1] = true; foiFeita[1] = true; data[1][0] = 14; data[1][1] = 12; data[1][2] = 2024;
+        tarefa[2] = "Corrigir testes"; temPrazo[2] = false; foiFeita[2] = false;
+        tarefa[3] = "Frequência de Programação"; temPrazo[3] = true; foiFeita[3] = false; data[3][0] = 13; data[3][1] = 1; data[3][2] = 2024;
+        tarefa[4] = "Presentes!!!"; temPrazo[4] = true; foiFeita[4] = false; data[4][0] = 25; data[4][1] = 12; data[4][2] = 2024;
         nTarefas = 5;
 
         menu(tarefa, temPrazo, foiFeita, data, nTarefas);
-
     }
-
 }
