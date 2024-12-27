@@ -31,7 +31,7 @@ public class Main {
                     menuVisualizar();
                     break;
                 case 'M':
-                    menuMarcar();
+                    menuMarcar(tarefa, temPrazo, foiFeita, data, nTarefas);
                     ;
                     break;
                 case 'E':
@@ -166,7 +166,7 @@ public class Main {
         } while (opcao != 'V');
     }
 
-    public static void menuMarcar() {
+    public static void menuMarcar(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner menuMarcar = new Scanner(System.in);
 
         char opcao = ' ';
@@ -183,23 +183,17 @@ public class Main {
 
             opcao = maiuscula(opcao);
             switch (opcao) {
-                case 'T':
+                case 'F':
                     System.out.println("\n(V)isualizar todas");
                     break;
-                case 'D':
+                case 'T':
                     System.out.println("\n(M)arcar)\n");
                     break;
-                case 'A':
-                    System.out.println("\n(E)ditar\n");
+                case 'D':
+                    desmarcarUltimaFeita(foiFeita, opcao);
                     break;
-                case 'P':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-                case 'F':
-                    System.out.println("\n(E)ditar\n");
-                    break;
-                case 'L':
-                    System.out.println("\n(E)ditar\n");
+                case 'N':
+                    marcarTodasDiaD(foiFeita, nTarefas, data, tarefa);
                     break;
                 case 'V':
                     break;
@@ -210,8 +204,41 @@ public class Main {
         } while (opcao != 'V');
     }
 
+    public static void desmarcarUltimaFeita(boolean[] foiFeita, int nTarefas) {
+        for (int i = nTarefas - 1; i >= 0; i--) {
+            if (foiFeita[i]) {
+                foiFeita[i] = false;
+                System.out.println("Tarefa " + (i + 1) + " desmarcada como feita.");
+                return;
+            }
+        }
+        System.out.println("Nenhuma tarefa está marcada como feita.");
+    }
+
+    public static void marcarTodasDiaD(boolean[] foiFeita, int nTarefas, int[][] data, String[] tarefa) {
+        Scanner marcarTodasDiaD = new Scanner(System.in);
+        System.out.print("Qual data deseja marcar como feita? ");
+        String marcarData = marcarTodasDiaD.nextLine();
+
+        String[] partesData = marcarData.split("/");
+        if (partesData.length == 3) {
+            int dia = Integer.parseInt(partesData[0]);
+            int mes = Integer.parseInt(partesData[1]);
+            int ano = Integer.parseInt(partesData[2]);
+            for(int i = 1; i <= nTarefas; i++){
+                if(dia == data[i-1][0] && mes == data[i-1][1] && ano == data[i-1][2]){
+                    foiFeita[i-1] = true;
+                    System.out.println("A tarefa " + tarefa[i-1] + " foi feita");
+                }
+            }
+        } else {
+            System.out.println("Formato de data inválido! A tarefa será cadastrada sem prazo.");
+        }
+    }
+
     public static void menuEditar(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
         Scanner menuEditar = new Scanner(System.in);
+        
 
         char opcao = ' ';
         do {
@@ -296,8 +323,8 @@ public class Main {
             temPrazo[nTarefas] = false;
         }
 
-        nTarefas++; // Incrementa o número de tarefas
-        return nTarefas; // Retorna o número atualizado de tarefas
+        nTarefas++;
+        return nTarefas;
     }
 
     public static int adicionarTarefaPosicaoN(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
@@ -323,7 +350,6 @@ public class Main {
             data[i][2] = data[i - 1][2];
         }
 
-        // Capturar os dados da nova tarefa
         System.out.print("Qual o nome da tarefa? ");
         String nomeTarefa = adicionarTarefaPosicaoN.nextLine();
         System.out.print("Tem prazo? (Digite no formato dd/mm/aaaa ou pressione Enter para sem prazo): ");
@@ -483,20 +509,43 @@ public class Main {
             else if (data[tarefa1][2] == 0 && data[tarefa2][2] > 0)
                 data[tarefa1][2] = (data[tarefa2][2]);
 
-        } else
-            System.out.println("Essas tarefas não existem");
+            for (int i = tarefa2; i <= nTarefas - 1; i++) {
+                tarefa[i] = tarefa[i + 1];
+                temPrazo[i] = temPrazo[i + 1];
+                foiFeita[i] = foiFeita[i + 1];
+                data[i][0] = data[i + 1][0];
+                data[i][1] = data[i + 1][1];
+                data[i][2] = data[i + 1][2];
+            }
+            // Limpar a última posição, que agora está vazia
+            tarefa[nTarefas - 1] = null;
+            temPrazo[nTarefas - 1] = false;
+            foiFeita[nTarefas - 1] = false;
+            data[nTarefas - 1][0] = 0;
+            data[nTarefas - 1][1] = 0;
+            data[nTarefas - 1][2] = 0;
 
-        System.out.println("\nLista atualizada de tarefas:");
-        for (int i = 0; i < nTarefas; i++) {
-            if (tarefa[i] != null) {
-                System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
-                if (temPrazo[i]) {
-                    System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
-                } else {
-                    System.out.println(" | Sem prazo");
+            // Atualizar o número total de tarefas
+            nTarefas--;
+            System.out.println("Tarefa removida com sucesso.");
+            System.out.println("\nLista atualizada de tarefas:");
+            for (int i = 0; i < nTarefas; i++) {
+                if (tarefa[i] != null) {
+                    System.out.print("Tarefa " + (i + 1) + ": " + tarefa[i]);
+                    if (temPrazo[i]) {
+                        System.out.println(" | Prazo: " + data[i][0] + "/" + data[i][1] + "/" + data[i][2]);
+                    } else {
+                        System.out.println(" | Sem prazo");
+                    }
                 }
             }
+
+            return nTarefas;
+
+        } else {
+            System.out.println("Essas tarefas não existem");
         }
+
         return nTarefas;
     }
 
@@ -529,7 +578,8 @@ public class Main {
         } while (opcao != 'V');
     }
 
-    public static void editarTexto(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
+    public static void editarTexto(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
+            int nTarefas) {
         Scanner editarTexto = new Scanner(System.in);
         int posicao = 0;
         System.out.print("Introduza a posição da tarefa: ");
@@ -539,7 +589,7 @@ public class Main {
         System.out.print("introduza o novo texto: ");
         String texto = editarTexto.nextLine();
 
-        tarefa[posicao-1] = texto;
+        tarefa[posicao - 1] = texto;
         System.out.print("Texto alterado com sucesso!");
 
         for (int i = 0; i < nTarefas; i++) {
@@ -554,20 +604,20 @@ public class Main {
         }
     }
 
-    public static void adicionarRemoverData(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][], int nTarefas) {
+    public static void adicionarRemoverData(String tarefa[], boolean temPrazo[], boolean foiFeita[], int data[][],
+            int nTarefas) {
         Scanner AdicionarRemoverrData = new Scanner(System.in);
         System.out.print("Introduza a posição da tarefa: ");
         int posicao = AdicionarRemoverrData.nextInt();
         AdicionarRemoverrData.nextLine(); // Limpar o buffer após nextInt()
 
-        if(temPrazo[posicao-1]){
-            data[posicao-1][0] = 0;
-            data[posicao-1][1] = 0;
-            data[posicao-1][2] = 0;
-            temPrazo[posicao-1] = false;
+        if (temPrazo[posicao - 1]) {
+            data[posicao - 1][0] = 0;
+            data[posicao - 1][1] = 0;
+            data[posicao - 1][2] = 0;
+            temPrazo[posicao - 1] = false;
             System.out.print("Data eliminada com sucesso!");
-        }
-        else{
+        } else {
             System.out.print("Introduza a data (Digite no formato dd/mm/aaaa): ");
             String prazo = AdicionarRemoverrData.nextLine();
             String[] partesData = prazo.split("/");
